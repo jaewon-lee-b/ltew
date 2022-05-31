@@ -1,0 +1,19 @@
+test_dataset:
+  dataset:
+    name: paired-image-folders
+    args:
+      root_path_1: ./load/benchmark/Set14/LR_bicubic/X3.50_X1.75
+      root_path_2: ./load/benchmark/Set14/HR
+  wrapper:
+    name: sr-asp-implicit-paired
+    args: 
+      scale: 3.50
+      scale2: 1.75
+  batch_size: 1
+eval_type: benchmark-3.50-1.75
+eval_bsize: 300000
+
+data_norm:
+  inp: {sub: [0.5], div: [0.5]}
+  gt: {sub: [0.5], div: [0.5]}
+

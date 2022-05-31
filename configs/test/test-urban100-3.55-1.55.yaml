@@ -1,0 +1,19 @@
+test_dataset:
+  dataset:
+    name: paired-image-folders
+    args:
+      root_path_1: ./load/benchmark/Urban100/LR_bicubic/X3.55_X1.55
+      root_path_2: ./load/benchmark/Urban100/HR
+  wrapper:
+    name: sr-asp-implicit-paired
+    args: 
+      scale: 3.55
+      scale2: 1.55
+  batch_size: 1
+eval_type: benchmark-3.55-1.55
+eval_bsize: 300000
+
+data_norm:
+  inp: {sub: [0.5], div: [0.5]}
+  gt: {sub: [0.5], div: [0.5]}
+
