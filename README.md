@@ -7,7 +7,7 @@ This repository contains the official implementation for LTEW introduced in the 
 ## Quick Start
 ### 0. Download a dataset.
 Dataset|Download
-:-:|:-:
+:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:
 DIV2KW (isc)|[Google Drive](https://drive.google.com/drive/folders/1v0zHDzTqghUS3awrw9aQtpSyREBPR-cz?usp=sharing)
 DIV2KW (osc)|[Google Drive](https://drive.google.com/drive/folders/1sPR3tSnIEfnfWOsbPxWuaFQsCr5kiLT7?usp=sharing)
 Set5W (isc)|[Google Drive](https://drive.google.com/drive/folders/19p46Fm1GqxFaz9N6lb5-xEF6fZ4dcVmy?usp=sharing)
