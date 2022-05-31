@@ -8,15 +8,15 @@ This repository contains the official implementation for LTEW introduced in the 
 ### 0. Download a dataset.
 Dataset|Download|Dataset|Download|Dataset|Download|Dataset|Download|Dataset|Download
 :-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:
-DIV2KW (isc)|[Google Drive](https://drive.google.com/drive/folders/1v0zHDzTqghUS3awrw9aQtpSyREBPR-cz?usp=sharing)
-DIV2KW (osc)|[Google Drive](https://drive.google.com/drive/folders/1sPR3tSnIEfnfWOsbPxWuaFQsCr5kiLT7?usp=sharing)
-Set5W (isc)|[Google Drive](https://drive.google.com/drive/folders/19p46Fm1GqxFaz9N6lb5-xEF6fZ4dcVmy?usp=sharing)
-Set5W (osc)|[Google Drive](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing)
-Set14W (isc)|[Google Drive](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing)
-Set14W (osc)|[Google Drive](https://drive.google.com/drive/folders/1qCBzQaLaCCAsj99kDoNWKl_tlj6c6tj_?usp=sharing)
-B100W (isc)|[Google Drive](https://drive.google.com/drive/folders/1-gr0zMLSkiM_5avZ9C2LVlGeKvNySzlM?usp=sharing)
-B100W (osc)|[Google Drive](https://drive.google.com/drive/folders/1cvzXRQLw9qJoQoF7LxlT5SRIWdcnH5O5?usp=sharing)
+DIV2KW (isc)|[Google Drive](https://drive.google.com/drive/folders/1v0zHDzTqghUS3awrw9aQtpSyREBPR-cz?usp=sharing)|
+Set5W (isc)|[Google Drive](https://drive.google.com/drive/folders/19p46Fm1GqxFaz9N6lb5-xEF6fZ4dcVmy?usp=sharing) |
+Set14W (isc)|[Google Drive](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing) |
+B100W (isc)|[Google Drive](https://drive.google.com/drive/folders/1-gr0zMLSkiM_5avZ9C2LVlGeKvNySzlM?usp=sharing) |
 Urban100W (isc)|[Google Drive](https://drive.google.com/drive/folders/1sW3T-BislLrXFzqVaFLvLqw0a96Psjt_?usp=sharing)
+DIV2KW (osc)|[Google Drive](https://drive.google.com/drive/folders/1sPR3tSnIEfnfWOsbPxWuaFQsCr5kiLT7?usp=sharing)
+Set5W (osc)|[Google Drive](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing) |
+Set14W (osc)|[Google Drive](https://drive.google.com/drive/folders/1qCBzQaLaCCAsj99kDoNWKl_tlj6c6tj_?usp=sharing) |
+B100W (osc)|[Google Drive](https://drive.google.com/drive/folders/1cvzXRQLw9qJoQoF7LxlT5SRIWdcnH5O5?usp=sharing) |
 Urban100W (osc)|[Google Drive](https://drive.google.com/drive/folders/135FEZ96sc0I1QcyBKwaHAaiMvIbPZ4yR?usp=sharing)
 
 Dataset|Download
