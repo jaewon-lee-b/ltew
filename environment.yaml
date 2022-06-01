@@ -1,4 +1,4 @@
-name: lte
+name: ltew
 channels:
   - pytorch
   - defaults
