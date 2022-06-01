@@ -77,7 +77,7 @@ load
 │   ├── DIV2K_valid_HR
 │   ├── DIV2K_valid_LR_bicubic
 │   ├── DIV2K_valid_LR_warp_in_scale
-│   └── DIV2K_valid_LR_warp_ouf_of_scaleå
+│   └── DIV2K_valid_LR_warp_ouf_of_scale
 ```
 
 ### 1. Download pre-trained models.
