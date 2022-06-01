@@ -273,29 +273,16 @@ def gridy2gridx_erp2pers(gridy, H, W, h, w, FOV, THETA, PHI):
 
 
 def celly2cellx_homography(celly, H, W, h, w, m, cpu=True):
-    cell, _ = gridy2gridx_homography(celly, H, W, h, w, m, cpu) # backward mapping
-    cell_1 = cell[7*cell.shape[0]//9:8*cell.shape[0]//9, :] \
-                - cell[6*cell.shape[0]//9:7*cell.shape[0]//9, :]
-    cell_2 = cell[5*cell.shape[0]//9:6*cell.shape[0]//9, :] \
-                - cell[4*cell.shape[0]//9:5*cell.shape[0]//9, :] # Jacobian
-    cell_3 = cell[7*cell.shape[0]//9:8*cell.shape[0]//9, :] \
-              - 2*cell[8*cell.shape[0]//9:9*cell.shape[0]//9, :] \
-                + cell[6*cell.shape[0]//9:7*cell.shape[0]//9, :]
-    cell_4 = cell[5*cell.shape[0]//9:6*cell.shape[0]//9, :] \
-              - 2*cell[8*cell.shape[0]//9:9*cell.shape[0]//9, :] \
-                + cell[4*cell.shape[0]//9:5*cell.shape[0]//9, :] # Second-order derivatives in Hessian
-    cell_5 = cell[3*cell.shape[0]//9:4*cell.shape[0]//9, :] \
-                - cell[0*cell.shape[0]//9:1*cell.shape[0]//9, :] \
-                - cell[1*cell.shape[0]//9:2*cell.shape[0]//9, :] \
-                + cell[0*cell.shape[0]//9:1*cell.shape[0]//9, :] \
-                - cell[2*cell.shape[0]//9:3*cell.shape[0]//9, :] \
-                + cell[0*cell.shape[0]//9:1*cell.shape[0]//9, :] # Cross-term in Hessian
-    cellx = torch.cat((cell_1, cell_2, 4*cell_3, 4*cell_4, cell_5), dim=-1)
-    return cellx
+    cellx, _ = gridy2gridx_homography(celly, H, W, h, w, m, cpu) # backward mapping
+    return shape_estimation(cellx)
 
 
 def celly2cellx_erp2pers(celly, H, W, h, w,  FOV, THETA, PHI):
-    cell, _ = gridy2gridx_erp2pers(celly, H, W, h, w,  FOV, THETA, PHI) # backward mapping
+    cellx, _ = gridy2gridx_erp2pers(celly, H, W, h, w,  FOV, THETA, PHI) # backward mapping
+    return shape_estimation(cellx)
+
+
+def shape_estimation(cell):
     cell_1 = cell[7*cell.shape[0]//9:8*cell.shape[0]//9, :] \
                 - cell[6*cell.shape[0]//9:7*cell.shape[0]//9, :]
     cell_2 = cell[5*cell.shape[0]//9:6*cell.shape[0]//9, :] \
@@ -312,8 +299,8 @@ def celly2cellx_erp2pers(celly, H, W, h, w,  FOV, THETA, PHI):
                 + cell[0*cell.shape[0]//9:1*cell.shape[0]//9, :] \
                 - cell[2*cell.shape[0]//9:3*cell.shape[0]//9, :] \
                 + cell[0*cell.shape[0]//9:1*cell.shape[0]//9, :] # Cross-term in Hessian
-    cellx = torch.cat((cell_1, cell_2, 4*cell_3, 4*cell_4, cell_5), dim=-1)
-    return cellx
+    shape = torch.cat((cell_1, cell_2, 4*cell_3, 4*cell_4, cell_5), dim=-1)
+    return shape
 
 
 def first_x_translation(a, b, e, f, g, x, y):
