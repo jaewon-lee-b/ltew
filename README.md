@@ -4,12 +4,12 @@ This repository contains the official implementation for LTEW introduced in the 
 [**Learning Implicit Fourier Representation for Continuous Image Warping**] (ECCV 2022)
 
 ## Installation
-Our code is based on pytorch 1.9.0, CUDA 10.2 and python 3.8. Higher version pytorch should also work well.
+Our code is based on Ubuntu 20.04, pytorch 1.10.0, CUDA 11.3 (NVIDIA RTX 3090 24GB, sm86) and python 3.6.
 
 We recommend using [conda](https://www.anaconda.com/distribution/) for installation:
 
 ```
-conda env create -f environment.yml
+conda env create --file environment.yaml
 conda activate lte
 ```
 
