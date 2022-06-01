@@ -1,44 +1,50 @@
 # Learning Implicit Fourier Representation for Continuous Image Warping
+
 This repository contains the official implementation for LTEW introduced in the following paper:
 
 [**Learning Implicit Fourier Representation for Continuous Image Warping**] (ECCV 2022)
 
+
 ## Installation
+
 Our code is based on Ubuntu 20.04, pytorch 1.10.0, CUDA 11.3 (NVIDIA RTX 3090 24GB, sm86) and python 3.6.
 
 We recommend using [conda](https://www.anaconda.com/distribution/) for installation:
 
 ```
 conda env create --file environment.yaml
-conda activate lte
+conda activate ltew
 ```
 
-Then, please install the pysrwarp as described in [SRWarp](https://github.com/sanghyun-son/srwarp) and [pysrwarp](https://github.com/sanghyun-son/pysrwarp).
+Then, please install pysrwarp as described in [SRWarp](https://github.com/sanghyun-son/srwarp).
+
 ```
 git clone https://github.com/sanghyun-son/pysrwarp
 cd pysrwarp
 make
 ```
 
+If your CUDA compatibility is sm86, modify cuda/Makefile before make.
+
+```
+vi cuda/Makefile
+```
+
 
 ## Quick Start
-### 0. Download a dataset.
-Dataset|Download
-:-:|:-:
-DIV2KW (isc)|[Google Drive](https://drive.google.com/drive/folders/1v0zHDzTqghUS3awrw9aQtpSyREBPR-cz?usp=sharing)
-DIV2KW (osc)|[Google Drive](https://drive.google.com/drive/folders/1sPR3tSnIEfnfWOsbPxWuaFQsCr5kiLT7?usp=sharing)
-Set5W (isc)|[Google Drive](https://drive.google.com/drive/folders/19p46Fm1GqxFaz9N6lb5-xEF6fZ4dcVmy?usp=sharing)
-Set5W (osc)|[Google Drive](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing)
-Set14W (isc)|[Google Drive](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing)
-Set14W (osc)|[Google Drive](https://drive.google.com/drive/folders/1qCBzQaLaCCAsj99kDoNWKl_tlj6c6tj_?usp=sharing)
-B100W (isc)|[Google Drive](https://drive.google.com/drive/folders/1-gr0zMLSkiM_5avZ9C2LVlGeKvNySzlM?usp=sharing)
-B100W (osc)|[Google Drive](https://drive.google.com/drive/folders/1cvzXRQLw9qJoQoF7LxlT5SRIWdcnH5O5?usp=sharing)
-Urban100W (isc)|[Google Drive](https://drive.google.com/drive/folders/1sW3T-BislLrXFzqVaFLvLqw0a96Psjt_?usp=sharing)
-Urban100W (osc)|[Google Drive](https://drive.google.com/drive/folders/135FEZ96sc0I1QcyBKwaHAaiMvIbPZ4yR?usp=sharing)
 
-Dataset|Download
-:-:|:-:
-B100 w/ transform|[Google Drive](https://drive.google.com/drive/folders/18ZMu7TVg1BPNo3k_eMKOlafkWPSs5gBW?usp=sharing)
+### 0. Download datasets.
+
+**Table 3: Homography transformation**
+
+- **DIV2K**: [DIV2KW (isc)](https://drive.google.com/drive/folders/1v0zHDzTqghUS3awrw9aQtpSyREBPR-cz?usp=sharing), [DIV2KW (osc)](https://drive.google.com/drive/folders/1sPR3tSnIEfnfWOsbPxWuaFQsCr5kiLT7?usp=sharing)
+
+- **Benchmark datasets**: [Set5W (isc)](https://drive.google.com/drive/folders/19p46Fm1GqxFaz9N6lb5-xEF6fZ4dcVmy?usp=sharing), [Set5W (osc)](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing), [Set14W (isc)](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing), [Set14W (osc)](https://drive.google.com/drive/folders/1qCBzQaLaCCAsj99kDoNWKl_tlj6c6tj_?usp=sharing), [B100W (isc)](https://drive.google.com/drive/folders/1-gr0zMLSkiM_5avZ9C2LVlGeKvNySzlM?usp=sharing), [B100W (osc)](https://drive.google.com/drive/folders/1cvzXRQLw9qJoQoF7LxlT5SRIWdcnH5O5?usp=sharing), [Urban100W (isc)](https://drive.google.com/drive/folders/1sW3T-BislLrXFzqVaFLvLqw0a96Psjt_?usp=sharing), [Urban100W (osc)](https://drive.google.com/drive/folders/135FEZ96sc0I1QcyBKwaHAaiMvIbPZ4yR?usp=sharing)
+
+**Table 5: Symetric-scale SR**
+
+- **B100 dataset with transformation**: [B100](https://drive.google.com/drive/folders/18ZMu7TVg1BPNo3k_eMKOlafkWPSs5gBW?usp=sharing)
+
 
 ### 1. Download a pre-trained model.
 
