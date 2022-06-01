@@ -119,7 +119,6 @@ def train(train_loader, model, optimizer, \
         )
         lr_crop = utils.quantize(lr_crop)
         m = transform.compensate_offset(m, ix, iy)        
-        ##################################################################################
 
         ############### backward map (coord, cell) from Y space to X space ###############
         gridx, mask = utils.gridy2gridx_homography(batch['coord'][0], \
@@ -127,7 +126,6 @@ def train(train_loader, model, optimizer, \
         
         cell = utils.celly2cellx_homography(batch['cell'][0], \
                    hr.shape[-2], hr.shape[-1], lr_crop.shape[-2], lr_crop.shape[-1], m.cuda(), cpu=False) # backward map cell from Y to X
-        ##################################################################################
 
         ######################## sample query point to train LTEW ########################
         num_samples = lr_crop.shape[-2] * lr_crop.shape[-1]
@@ -137,7 +135,6 @@ def train(train_loader, model, optimizer, \
         gridx = gridx[sample_lst].unsqueeze(0).expand(hr.shape[0], -1, -1) # coord sample
         cell = cell[sample_lst].unsqueeze(0).expand(hr.shape[0], -1, -1) # cell sample
         gt = (batch['gt'][:, sample_lst].cuda() - gt_sub) / gt_div # gt sample
-        ##################################################################################
 
         pred = model(lr_crop, gridx, cell)
         loss = loss_fn(pred, gt)

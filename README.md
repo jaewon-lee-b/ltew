@@ -111,13 +111,13 @@ LTEW-RCAN|[Google Drive](https://drive.google.com/file/d/1XPxwop6Q5EZGi9pM392VC5
 
 ###  **Asymmetric-scale SR**
 
-**Train**: `python train_lte.py --config configs/train-div2k/train_rcan-lte.yaml --gpu 0`
+**Train**: `CUDA_VISIBLE_DEVICES=0 python train_lte.py --config configs/train-div2k/train_rcan-lte.yaml --gpu 0`
 
 **Test**: `bash ./scripts/test-benchmark-asym.sh save/_train_rcan-lte/epoch-last.pth 0`
 
 ### **Homography transformation**
 
-**Train**: `python train_ltew.py --config configs/train-div2k/train_rrdb-lte-warp.yaml --gpu 0,1`
+**Train**: `CUDA_VISIBLE_DEVICES=0,1 python train_ltew.py --config configs/train-div2k/train_rrdb-lte-warp.yaml --gpu 0,1`
 
 **Test**: `bash ./scripts/test-benchmark-warp.sh ./save/_train_rrdb-lte-warp/epoch-last.pth 0`
 
