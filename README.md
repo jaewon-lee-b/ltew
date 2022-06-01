@@ -139,12 +139,25 @@ The script [Eval-Fourier-Feature-Space](https://github.com/jaewon-lee-b/ltew/blo
 
 ## Demo ERP perspective projection
 
+Download the [StreetLearn](https://sites.google.com/view/streetlearn).
+
+Then, we downsample HR ERP images by a factor of 4 and then project to a size of 832 X 832 with a field of view (FOV) 120-deg for Fig.9.
+
 `python demo_erp2pers.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
 
 ## Citation
 
 If you find our work useful in your research, please consider citing our paper:
+
+```
+@article{ltew-jaewon-lee,
+  title={Learning Implicit Fourier Representation for Continuous Image Warping},
+  author={Jaewon Lee, Kwang Pyo Choi, Kyong Hwan Jin},
+  journal={ECCV},
+  year={2022}
+}
+```
 
 
 ## Acknowledgements
