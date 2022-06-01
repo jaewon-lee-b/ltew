@@ -119,9 +119,7 @@ LTEW-RCAN|[Google Drive](https://drive.google.com/file/d/1XPxwop6Q5EZGi9pM392VC5
 
 **Train**: `python train_ltew.py --config configs/train-div2k/train_rrdb-lte-warp.yaml --gpu 0,1`
 
-**Test on DIV2K**: `bash ./scripts/test-div2k-warp.sh ./save/_train_rrdb-lte-warp/epoch-last.pth 0`
-
-**Test on benchmark**: `bash ./scripts/test-benchmark-warp.sh ./save/_train_rrdb-lte-warp/epoch-last.pth 0`
+**Test**: `bash ./scripts/test-benchmark-warp.sh ./save/_train_rrdb-lte-warp/epoch-last.pth 0`
 
 Model|Training time (# GPU)
 :-:|:-:
