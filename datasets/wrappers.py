@@ -82,7 +82,7 @@ class SRImplicitPaired(Dataset):
     
     
 @register('sr-asp-implicit-paired')
-class SRASPImplicitPaired(Dataset):
+class SRAspImplicitPaired(Dataset):
 
     def __init__(self, dataset, scale=1, scale2=2):
         self.dataset = dataset
@@ -268,7 +268,7 @@ class SRImplicitDownsampled(Dataset):
 
     
 @register('sr-asp-implicit-downsampled')
-class SRASPImplicitDownsampled(Dataset):
+class SRAspImplicitDownsampled(Dataset):
 
     def __init__(self, dataset, inp_size=None, scale_min=1, scale_max=None,
                  augment=False, sample_q=None):

@@ -80,7 +80,6 @@ load
 │   └── DIV2K_valid_LR_warp_ouf_of_scaleå
 ```
 
-
 ### 1. Download pre-trained models.
 
 Model|Download
@@ -132,6 +131,7 @@ RCAN-LTEW|130h (1 GPU)
 
 We use NVIDIA RTX 3090 24GB for training.
 
+
 ## Fourier Space
 
 The script [Eval-Fourier-Feature-Space](https://github.com/jaewon-lee-b/ltew/blob/main/Eval-Fourier-Feature-Space.ipynb) is used to generate the paper plots.
@@ -143,7 +143,10 @@ The script [Eval-Fourier-Feature-Space](https://github.com/jaewon-lee-b/ltew/blo
 
 
 ## Citation
+
 If you find our work useful in your research, please consider citing our paper:
 
+
 ## Acknowledgements
+
 This code is built on [LIIF](https://github.com/yinboc/liif) and [SRWarp](https://github.com/sanghyun-son/srwarp). We thank the authors for sharing their codes.

@@ -71,6 +71,7 @@ class ImageFolder(Dataset):
         elif self.cache == 'in_memory':
             return x
 
+        
 @register('image-transform-folder')
 class ImageTransformFolder(Dataset):
 
@@ -141,6 +142,7 @@ class PairedImageFolders(Dataset):
     def __getitem__(self, idx):
         return self.dataset_1[idx], self.dataset_2[idx]
     
+    
 @register('paired-image-transform-folders')
 class PairedImageTransformFolders(Dataset):
 
@@ -153,4 +155,3 @@ class PairedImageTransformFolders(Dataset):
 
     def __getitem__(self, idx):
         return self.dataset_1[idx]['image'], self.dataset_2[idx], self.dataset_1[idx]['transform']
-    
