@@ -41,12 +41,47 @@ vi cuda/Makefile
 
 - **Benchmark datasets**: [Set5W (isc)](https://drive.google.com/drive/folders/19p46Fm1GqxFaz9N6lb5-xEF6fZ4dcVmy?usp=sharing), [Set5W (osc)](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing), [Set14W (isc)](https://drive.google.com/drive/folders/1a2BebB8xPnkRc7nKzWkEVao2XK76qJst?usp=sharing), [Set14W (osc)](https://drive.google.com/drive/folders/1qCBzQaLaCCAsj99kDoNWKl_tlj6c6tj_?usp=sharing), [B100W (isc)](https://drive.google.com/drive/folders/1-gr0zMLSkiM_5avZ9C2LVlGeKvNySzlM?usp=sharing), [B100W (osc)](https://drive.google.com/drive/folders/1cvzXRQLw9qJoQoF7LxlT5SRIWdcnH5O5?usp=sharing), [Urban100W (isc)](https://drive.google.com/drive/folders/1sW3T-BislLrXFzqVaFLvLqw0a96Psjt_?usp=sharing), [Urban100W (osc)](https://drive.google.com/drive/folders/135FEZ96sc0I1QcyBKwaHAaiMvIbPZ4yR?usp=sharing)
 
-**Table 5: Symetric-scale SR**
+**Table 5: Symmetric-scale SR**
 
 - **B100 dataset with transformation**: [B100](https://drive.google.com/drive/folders/18ZMu7TVg1BPNo3k_eMKOlafkWPSs5gBW?usp=sharing)
 
+`mkdir load` and put the datasets as follows:
 
-### 1. Download a pre-trained model.
+```
+load
+├── benchmark
+│   ├── B100
+│   │   ├── HR
+│   │   ├── LR_bicubic
+│   │   ├── LR_bicubic_Transform
+│   │   ├── LR_warp_in_scale
+│   │   └── LR_warp_out_of_scale
+│   ├── Set14
+│   │   ├── HR
+│   │   ├── LR_bicubic
+│   │   ├── LR_warp_in_scale
+│   │   └── LR_warp_out_of_scale
+│   ├── Set5
+│   │   ├── HR
+│   │   ├── LR_bicubic
+│   │   ├── LR_warp_in_scale
+│   │   └── LR_warp_out_of_scale
+│   └── Urban100
+│       ├── HR
+│       ├── LR_bicubic
+│       ├── LR_warp_in_scale
+│       └── LR_warp_out_of_scale
+├── div2k
+│   ├── DIV2K_train_HR
+│   ├── DIV2K_train_LR_bicubic
+│   ├── DIV2K_valid_HR
+│   ├── DIV2K_valid_LR_bicubic
+│   ├── DIV2K_valid_LR_warp_in_scale
+│   └── DIV2K_valid_LR_warp_ouf_of_scaleå
+```
+
+
+### 1. Download pre-trained models.
 
 Model|Download
 :-:|:-:
@@ -66,7 +101,7 @@ LTEW-RCAN|[Google Drive](https://drive.google.com/file/d/1XPxwop6Q5EZGi9pM392VC5
 
 ```bash ./scripts/test-benchmark-warp.sh ./save/rrdb-lte-warp.pth 0```
 
-**Table 5: Symetric-scale SR**
+**Table 5: Symmetric-scale SR**
 
 ```bash ./scripts/test-b100-sym-w-lte.sh save/rcan-lte.pth 0```
 
