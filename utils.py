@@ -333,7 +333,7 @@ def second_xy_translation(a, b, e, f, g, x, y):
     return num/den
 
 
-def JacobT(transf, x, y, h, w):
+def JacobTInv(transf, x, y, h, w):
     a = transf[0, 0]
     b = transf[0, 1]
     c = transf[1, 0]
@@ -348,8 +348,8 @@ def JacobT(transf, x, y, h, w):
     JacobT[1, 0] = first_x_translation(c, d, e, f, h, 2*y/w + 1/w - 1, 2*x/h + 1/h - 1)
     JacobT[0, 1] = first_y_translation(a, b, e, f, g, 2*y/w + 1/w - 1, 2*x/h + 1/h - 1)
     JacobT[1, 1] = first_y_translation(c, d, e, f, h, 2*y/w + 1/w - 1, 2*x/h + 1/h - 1)
-    JacobT = torch.linalg.inv(JacobT)
-    return JacobT
+    JacobTInv = torch.linalg.inv(JacobT)
+    return JacobTInv
 
 
 def quantize(x: torch.Tensor) -> torch.Tensor:
