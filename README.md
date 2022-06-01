@@ -1,8 +1,25 @@
 # Learning Implicit Fourier Representation for Continuous Image Warping
 This repository contains the official implementation for LTEW introduced in the following paper:
 
+[**Learning Implicit Fourier Representation for Continuous Image Warping**] (ECCV 2022)
 
 ## Installation
+Our code is based on pytorch 1.9.0, CUDA 10.2 and python 3.8. Higher version pytorch should also work well.
+
+We recommend using [conda](https://www.anaconda.com/distribution/) for installation:
+
+```
+conda env create -f environment.yml
+conda activate lte
+```
+
+Then, please install the pysrwarp as described in [SRWarp](https://github.com/sanghyun-son/srwarp) and [pysrwarp](https://github.com/sanghyun-son/pysrwarp).
+```
+git clone https://github.com/sanghyun-son/pysrwarp
+cd pysrwarp
+make
+```
+
 
 ## Quick Start
 ### 0. Download a dataset.
