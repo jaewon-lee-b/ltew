@@ -176,7 +176,7 @@ class SRImplicitHomographyPaired(Dataset):
         cell = make_cell(coord_y, img_hr)
         
         if self.scaling:
-            cell = celly2cellx_homography(cell, H, W, h, w, transform.scaling(min(self.scale, self.max_scale)).squeeze(0)) # clipping for extrapolation as in LTE [30]
+            cell = celly2cellx_homography(cell, H, W, h, w, transform.scaling(min(self.scale, self.max_scale)).squeeze(0)) # clipping for extrapolation as in LTE
         else:
             cell = celly2cellx_homography(cell, H, W, h, w, m) # backward mapping
         

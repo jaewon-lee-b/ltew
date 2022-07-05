@@ -12,7 +12,6 @@ import datasets
 import models
 import utils
 
-
 def batched_predict(model, inp, coord, cell, bsize):
     with torch.no_grad():
         model.gen_feat(inp)
@@ -26,7 +25,6 @@ def batched_predict(model, inp, coord, cell, bsize):
             ql = qr
         pred = torch.cat(preds, dim=1)
     return pred
-
 
 def eval_psnr(loader, model, data_norm=None, eval_type=None, eval_bsize=None, scale_max=4,
               verbose=False):

@@ -254,12 +254,12 @@ def gridy2gridx_erp2pers(gridy, H, W, h, w, FOV, THETA, PHI):
     [R1, _] = cv2.Rodrigues(z_axis * np.radians(THETA))
     [R2, _] = cv2.Rodrigues(np.dot(R1, y_axis) * np.radians(PHI))
     
-    gridx = torch.mm(torch.from_numpy(R1), gridy.permute(1, 0)).permute(1, 0)
-    gridx = torch.mm(torch.from_numpy(R2), gridx.permute(1, 0)).permute(1, 0)
+    gridy = torch.mm(torch.from_numpy(R1), gridy.permute(1, 0)).permute(1, 0)
+    gridy = torch.mm(torch.from_numpy(R2), gridy.permute(1, 0)).permute(1, 0)
 
     # find corresponding sphere coordinate 
-    lat = torch.arcsin(gridx[:, 2]) / np.pi * 2
-    lon = torch.atan2(gridx[:, 1] , gridx[:, 0]) / np.pi
+    lat = torch.arcsin(gridy[:, 2]) / np.pi * 2
+    lon = torch.atan2(gridy[:, 1] , gridy[:, 0]) / np.pi
         
     gridx = torch.stack((lat, lon), dim=-1)
     gridx = gridx.float()
@@ -272,13 +272,61 @@ def gridy2gridx_erp2pers(gridy, H, W, h, w, FOV, THETA, PHI):
     return gridx, mask
 
 
+def gridy2gridx_erp2fish(gridy, H, W, h, w, FOV, THETA, PHI):    
+    # scaling    
+    wFOV = FOV
+    hFOV = float(H) / W * wFOV
+    h_len = h*np.sin(np.radians(hFOV / 2.0))
+    w_len = w*np.sin(np.radians(wFOV / 2.0))
+    
+    gridy = gridy.float()
+    gridy[:, 0] *= h_len / h
+    gridy[:, 1] *= w_len / w
+    gridy = gridy.double()
+    
+    # H -> negative z-axis, W -> y-axis, place Warepd_plane on x-axis
+    gridy = gridy.flip(-1)
+    hr_norm = torch.norm(gridy, p=2, dim=-1, keepdim=True)
+    
+    mask = torch.where(hr_norm > 1, 0.0, 1.0)
+    hr_norm = torch.where(hr_norm > 1, 1.0, hr_norm)
+    hr_xaxis = torch.sqrt(1 - hr_norm**2)
+    gridy = torch.cat((hr_xaxis, gridy), dim=-1)
+    
+    # set center position (theta, phi)
+    y_axis = np.array([0.0, 1.0, 0.0], np.float64)
+    z_axis = np.array([0.0, 0.0, 1.0], np.float64)
+    [R1, _] = cv2.Rodrigues(z_axis * np.radians(THETA))
+    [R2, _] = cv2.Rodrigues(np.dot(R1, y_axis) * np.radians(PHI))
+
+    gridy = torch.mm(torch.from_numpy(R1), gridy.permute(1, 0)).permute(1, 0)
+    gridy = torch.mm(torch.from_numpy(R2), gridy.permute(1, 0)).permute(1, 0)
+
+    # find corresponding sphere coordinate 
+    lat = torch.arcsin(gridy[:, 2].clamp_(-1+1e-6, 1-1e-6)) / np.pi * 2 # clamping to prevent arcsin explosion
+    lon = torch.atan2(gridy[:, 1], gridy[:, 0]) / np.pi
+    
+    gridx = torch.stack((lat, lon), dim=-1)
+    gridx = gridx.float()
+    
+    # mask
+    mask = mask.squeeze(-1).float()
+    
+    return gridx, mask
+
+
 def celly2cellx_homography(celly, H, W, h, w, m, cpu=True):
     cellx, _ = gridy2gridx_homography(celly, H, W, h, w, m, cpu) # backward mapping
     return shape_estimation(cellx)
 
 
-def celly2cellx_erp2pers(celly, H, W, h, w,  FOV, THETA, PHI):
-    cellx, _ = gridy2gridx_erp2pers(celly, H, W, h, w,  FOV, THETA, PHI) # backward mapping
+def celly2cellx_erp2pers(celly, H, W, h, w, FOV, THETA, PHI):
+    cellx, _ = gridy2gridx_erp2pers(celly, H, W, h, w, FOV, THETA, PHI) # backward mapping
+    return shape_estimation(cellx)
+
+
+def celly2cellx_erp2fish(celly, H, W, h, w, FOV, THETA, PHI):
+    cellx, _ = gridy2gridx_erp2fish(celly, H, W, h, w, FOV, THETA, PHI) # backward mapping
     return shape_estimation(cellx)
 
 

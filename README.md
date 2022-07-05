@@ -141,8 +141,11 @@ Download the [StreetLearn](https://sites.google.com/view/streetlearn).
 
 Then, we downsample HR ERP images by a factor of 4 and then project to a size of 832 X 832 with a field of view (FOV) 120-deg for Fig.9.
 
-`python demo_erp2pers.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
+`python demo.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --mode erp2pers --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/erp2pers-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
+For fisheye,
+
+`python demo.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --mode erp2fish --model save/edsr-baseline-lte-warp.pth --FOV 180 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
 ## Citation
 
