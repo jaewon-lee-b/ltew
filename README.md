@@ -143,7 +143,11 @@ Then, we downsample HR ERP images by a factor of 4 and then project to a size of
 
 `python demo.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --mode erp2pers --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/erp2pers-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
-For fisheye,
+For perspective view -> ERP,
+
+`python demo.py --input ./save_image/erp2pers-kc1Ppxk2yKIsNV9UCvOlbg.png --mode pers2erp --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,1664 --output ./save_image/pers2erp-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
+
+For ERP -> fisheye view,
 
 `python demo.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --mode erp2fish --model save/edsr-baseline-lte-warp.pth --FOV 180 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
