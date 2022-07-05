@@ -1,8 +1,8 @@
-# Learning Implicit Fourier Representation for Continuous Image Warping
+# Learning Local Implicit Fourier Representation for Image Warping
 
 This repository contains the official implementation for LTEW introduced in the following paper:
 
-[**Learning Implicit Fourier Representation for Continuous Image Warping**] (ECCV 2022)
+[**Learning Local Implicit Fourier Representation for Image Warping**](https://ipl.dgist.ac.kr/LTEW.pdf) (ECCV 2022)
 
 
 ## Installation
@@ -150,7 +150,7 @@ If you find our work useful in your research, please consider citing our paper:
 
 ```
 @article{ltew-jaewon-lee,
-  title={Learning Implicit Fourier Representation for Continuous Image Warping},
+  title={Learning Local Implicit Fourier Representation for Image Warping},
   author={Jaewon Lee, Kwang Pyo Choi, Kyong Hwan Jin},
   journal={ECCV},
   year={2022}
