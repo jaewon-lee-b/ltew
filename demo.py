@@ -6,7 +6,7 @@ import torch
 from torchvision import transforms
 
 import models
-from utils import make_coord, make_cell, gridy2gridx_erp2pers, gridy2gridx_erp2fish, celly2cellx_erp2pers, celly2cellx_erp2fish
+from utils import make_coord, make_cell, gridy2gridx_erp2pers, gridy2gridx_erp2fish, gridy2gridx_pers2erp, celly2cellx_erp2pers, celly2cellx_erp2fish, celly2cellx_pers2erp
 from test_ltew import batched_predict
 
 if __name__ == '__main__':
@@ -35,6 +35,8 @@ if __name__ == '__main__':
         gridx, mask = gridy2gridx_erp2pers(gridy, H, W, h, w, int(args.FOV), int(args.THETA), int(args.PHI))
     elif args.mode == 'erp2fish':
         gridx, mask = gridy2gridx_erp2fish(gridy, H, W, h, w, int(args.FOV), int(args.THETA), int(args.PHI))
+    elif args.mode == 'pers2erp':
+        gridx, mask = gridy2gridx_pers2erp(gridy, H, W, h, w)
     else:
         pass
     mask = mask.view(H, W, 1).permute(2, 0, 1).cpu()
@@ -44,6 +46,8 @@ if __name__ == '__main__':
         cellx = celly2cellx_erp2pers(celly, H, W, h, w, int(args.FOV), int(args.THETA), int(args.PHI))
     elif args.mode == 'erp2fish':
         cellx = celly2cellx_erp2fish(celly, H, W, h, w, int(args.FOV), int(args.THETA), int(args.PHI))
+    elif args.mode == 'pers2erp':
+        cellx = celly2cellx_pers2erp(celly, H, W, h, w)
     else:
         pass
     
