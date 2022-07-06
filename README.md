@@ -135,7 +135,7 @@ We use NVIDIA RTX 3090 24GB for training.
 The script [Eval-Fourier-Feature-Space](https://github.com/jaewon-lee-b/ltew/blob/main/Eval-Fourier-Feature-Space.ipynb) is used to generate the paper plots.
 
 
-## Demo ERP perspective projection
+## Demo ERP
 
 Download the [StreetLearn](https://sites.google.com/view/streetlearn).
 
@@ -150,6 +150,11 @@ For perspective view -> ERP,
 For ERP -> fisheye view,
 
 `python demo.py --input ./load/streetlearn/LR_bicubic/kc1Ppxk2yKIsNV9UCvOlbg.png --mode erp2fish --model save/edsr-baseline-lte-warp.pth --FOV 180 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
+
+For fisheye view -> ERP,
+
+`python demo.py --input ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --mode fish2erp --model save/edsr-baseline-lte-warp.pth --FOV 180 --THETA 0 --PHI 0 --resolution 832,1664 --output ./save_image/fish2erp-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
+
 
 ## Citation
 

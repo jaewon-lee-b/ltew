@@ -332,8 +332,29 @@ def gridy2gridx_pers2erp(gridy, H, W, h, w):
     gridx = gridx.float()
     
     # mask
-    mask = torch.where(torch.abs(gridx) > 1, 0, 1)
-    mask = mask[:, 0] * mask[:, 1]
+    mask1 = torch.where(x0 < 0, 0, 1) # filtering in backplane
+    mask2 = torch.where(torch.abs(gridx) > 1, 0, 1)
+    mask = mask1 * mask2[:, 0] * mask2[:, 1]
+    mask = mask.float()
+    
+    return gridx, mask
+
+
+def gridy2gridx_fish2erp(gridy, H, W, h, w):    
+    # scaling    
+    gridy = gridy.double()
+    lat = gridy[:, 0] * np.pi / 2
+    lon = gridy[:, 1] * np.pi
+    
+    z0 = torch.sin(lat)
+    x0 = torch.cos(lon) * torch.sqrt(1 - z0**2)
+    y0 = torch.sin(lon) * torch.sqrt(1 - z0**2)
+        
+    gridx = torch.stack((z0, y0), dim=-1)
+    gridx = gridx.float()
+    
+    # mask
+    mask = torch.where(x0 < 0, 0, 1) # filtering in backplane
     mask = mask.float()
     
     return gridx, mask
@@ -356,6 +377,11 @@ def celly2cellx_erp2fish(celly, H, W, h, w, FOV, THETA, PHI):
 
 def celly2cellx_pers2erp(celly, H, W, h, w):
     cellx, _ = gridy2gridx_pers2erp(celly, H, W, h, w) # backward mapping
+    return shape_estimation(cellx)
+
+
+def celly2cellx_fish2erp(celly, H, W, h, w):
+    cellx, _ = gridy2gridx_fish2erp(celly, H, W, h, w) # backward mapping
     return shape_estimation(cellx)
 
 
