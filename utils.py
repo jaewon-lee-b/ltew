@@ -11,6 +11,17 @@ from tensorboardX import SummaryWriter
 import cv2
 from srwarp import transform
 
+def str2bool(v):
+    if isinstance(v, bool):
+         return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+        
+
 class Averager():
 
     def __init__(self):
@@ -360,6 +371,53 @@ def gridy2gridx_fish2erp(gridy, H, W, h, w):
     return gridx, mask
 
 
+def gridy2gridx_fish2pers(gridy, H, W, h, w, FOV, THETA, PHI):
+    # scaling    
+    wFOV = FOV
+    hFOV = float(H) / W * wFOV
+    h_len = h*np.tan(np.radians(hFOV / 2.0))
+    w_len = w*np.tan(np.radians(wFOV / 2.0))
+    
+    gridy = gridy.float()
+    gridy[:, 0] *= h_len / h
+    gridy[:, 1] *= w_len / w
+    gridy = gridy.double()
+    
+    # H -> negative z-axis, W -> y-axis, place Warepd_plane on x-axis
+    gridy = gridy.flip(-1)
+    gridy = torch.cat((torch.ones(gridy.shape[0], 1), gridy), dim=-1)
+    
+    # project warped planed onto sphere
+    hr_norm = torch.norm(gridy, p=2, dim=-1, keepdim=True)
+    gridy /= hr_norm
+    
+    # set center position (theta, phi)
+    y_axis = np.array([0.0, 1.0, 0.0], np.float64)
+    z_axis = np.array([0.0, 0.0, 1.0], np.float64)
+    [R1, _] = cv2.Rodrigues(z_axis * np.radians(THETA))
+    [R2, _] = cv2.Rodrigues(np.dot(R1, y_axis) * np.radians(PHI))
+    
+    gridy = torch.mm(torch.from_numpy(R1), gridy.permute(1, 0)).permute(1, 0)
+    gridy = torch.mm(torch.from_numpy(R2), gridy.permute(1, 0)).permute(1, 0)
+
+    # find corresponding sphere coordinate 
+    lat = torch.arcsin(gridy[:, 2])
+    lon = torch.atan2(gridy[:, 1] , gridy[:, 0])
+    
+    z0 = torch.sin(lat)
+    x0 = torch.cos(lon) * torch.sqrt(1 - z0**2)
+    y0 = torch.sin(lon) * torch.sqrt(1 - z0**2)
+        
+    gridx = torch.stack((z0, y0), dim=-1)
+    gridx = gridx.float()
+    
+    # mask
+    mask = torch.where(x0 < 0, 0, 1) # filtering in backplane
+    mask = mask.float()
+    
+    return gridx, mask
+
+
 def celly2cellx_homography(celly, H, W, h, w, m, cpu=True):
     cellx, _ = gridy2gridx_homography(celly, H, W, h, w, m, cpu) # backward mapping
     return shape_estimation(cellx)
@@ -382,6 +440,11 @@ def celly2cellx_pers2erp(celly, H, W, h, w):
 
 def celly2cellx_fish2erp(celly, H, W, h, w):
     cellx, _ = gridy2gridx_fish2erp(celly, H, W, h, w) # backward mapping
+    return shape_estimation(cellx)
+
+
+def celly2cellx_fish2pers(celly, H, W, h, w, FOV, THETA, PHI):
+    cellx, _ = gridy2gridx_fish2pers(celly, H, W, h, w, FOV, THETA, PHI) # backward mapping
     return shape_estimation(cellx)
 
 

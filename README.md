@@ -155,6 +155,10 @@ For fisheye view -> ERP,
 
 `python demo.py --input ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --mode fish2erp --model save/edsr-baseline-lte-warp.pth --FOV 180 --THETA 0 --PHI 0 --resolution 832,1664 --output ./save_image/fish2erp-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
+For fisheye view -> perspective view,
+
+`python demo.py --input ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --mode fish2pers --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/fish2pers-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
+
 
 ## Citation
 

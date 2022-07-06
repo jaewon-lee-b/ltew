@@ -20,11 +20,16 @@ class LTE_WARP(nn.Module):
 
         self.imnet = models.make(imnet_spec, args={'in_dim': hidden_dim})
 
-    def gen_feat(self, inp):
+    def gen_feat(self, inp, cpu=False):
         self.inp = inp
-        self.feat_coord = make_coord(inp.shape[-2:], flatten=False).cuda() \
-            .permute(2, 0, 1) \
-            .unsqueeze(0).expand(inp.shape[0], 2, *inp.shape[-2:])
+        if cpu:
+            self.feat_coord = make_coord(inp.shape[-2:], flatten=False) \
+                .permute(2, 0, 1) \
+                .unsqueeze(0).expand(inp.shape[0], 2, *inp.shape[-2:])            
+        else:
+            self.feat_coord = make_coord(inp.shape[-2:], flatten=False).cuda() \
+                .permute(2, 0, 1) \
+                .unsqueeze(0).expand(inp.shape[0], 2, *inp.shape[-2:])
         
         self.feat = self.encoder(inp)
         self.coeff = self.coef(self.feat)
@@ -104,6 +109,6 @@ class LTE_WARP(nn.Module):
                       .permute(0, 2, 1)
         return ret
 
-    def forward(self, inp, coord, cell):
-        self.gen_feat(inp)
+    def forward(self, inp, coord, cell, cpu=False):
+        self.gen_feat(inp, cpu)
         return self.query_rgb(coord, cell)
