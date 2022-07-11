@@ -160,6 +160,11 @@ For fisheye view -> perspective view,
 `python demo.py --input ./save_image/erp2fish-kc1Ppxk2yKIsNV9UCvOlbg.png --mode fish2pers --model save/edsr-baseline-lte-warp.pth --FOV 120 --THETA 0 --PHI 0 --resolution 832,832 --output ./save_image/fish2pers-kc1Ppxk2yKIsNV9UCvOlbg.png --gpu 0`
 
 
+## Demo MARS
+
+The directory [./fig](https://github.com/jaewon-lee-b/ltew/tree/main/fig) contains full-resolution MARS images. 
+
+
 ## Citation
 
 If you find our work useful in your research, please consider citing our paper:
